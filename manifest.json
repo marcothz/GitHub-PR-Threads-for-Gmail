@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "GitHub PR Threads for Gmail",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Find, review the status of and clean up every GitHub notification email about the same pull request.",
   "icons": {
     "16": "icons/icon16.png",
