@@ -126,6 +126,24 @@ Certify all three statements:
 - Visibility: Public, Unlisted, or Private (Google Workspace domain only).
 - Regions: all regions.
 
+## Test instructions tab
+
+Helps the reviewer test the extension without guessing; leave the
+username and password fields empty (the extension has no login of its own).
+
+```text
+The extension only acts on GitHub pull request notification emails in Gmail (from notifications@github.com, subjects like "[owner/repo] Title (PR #123)").
+
+To test:
+1. Install the extension and open Gmail.
+2. Open any GitHub pull request notification email. The buttons "Find all for PR #N" and "Delete all for PR #N" appear under the subject, with a prompt to connect GitHub.
+3. To see the PR status, open the extension's options, paste any GitHub personal access token (a classic token with no scopes works for public repositories) and click Save. Reload Gmail and reopen the email: the state, review and checks chips appear.
+4. "Find all for PR #N" (or Alt+Shift+P) runs a Gmail search for every notification about that PR.
+5. "Delete all for PR #N" (or Alt+Shift+D) selects the matching results, asks for confirmation and moves them to Gmail's Trash.
+
+No account or login on our side is needed; the extension has no servers.
+```
+
 ## Package
 
 Releases are automated: see "Releasing" in the README. To build the zips by
