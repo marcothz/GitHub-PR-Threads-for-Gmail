@@ -398,7 +398,7 @@
     statusEl.dataset.prKey = key;
 
     const findButton = barButton(
-      `Find all emails for PR #${pr.number}`,
+      `Find all for PR #${pr.number}`,
       "ghpr-btn",
       `Search Gmail for every notification about ${pr.repo} PR #${pr.number} (Alt+Shift+P)`,
       () => runSearch(buildQuery(pr))

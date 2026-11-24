@@ -7,7 +7,7 @@ Chrome extension (Manifest V3) for GitHub pull request notifications in Gmail.
 - **PR status under the subject**: state (Open, Draft, Merged, Closed), review
   decision (Approved, Changes requested, Review required) and CI checks
   (passing, failing, running). The state chip links to the PR on GitHub.
-- **Find all emails for the PR**: runs
+- **Find all for the PR**: runs
   `from:notifications@github.com subject:"[owner/repo]" subject:"PR #N"`.
 - **Delete all for the PR**: runs the same search, selects only the rows
   whose subject names this repository and PR, asks for confirmation and
@@ -19,7 +19,7 @@ Chrome extension (Manifest V3) for GitHub pull request notifications in Gmail.
 
 | Action | Button under the subject | Shortcut | Toolbar icon |
 | --- | --- | --- | --- |
-| Find all emails | Find all emails for PR #N | `Alt+Shift+P` | yes |
+| Find all | Find all for PR #N | `Alt+Shift+P` | yes |
 | Delete all | Delete all for PR #N | `Alt+Shift+D` | no |
 
 Shortcuts work on an open PR email and on the extension's search results

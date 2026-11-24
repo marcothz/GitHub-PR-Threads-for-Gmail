@@ -24,7 +24,7 @@
       "16": "icons/icon16.png",
       "32": "icons/icon32.png"
     },
-    "default_title": "Find all emails for this PR"
+    "default_title": "Find all for this PR"
   },
   "options_ui": {
     "page": "options.html",
@@ -35,13 +35,13 @@
       "suggested_key": {
         "default": "Alt+Shift+P"
       },
-      "description": "Find all emails for the open PR notification"
+      "description": "Find all for the current PR"
     },
     "delete-pr-emails": {
       "suggested_key": {
         "default": "Alt+Shift+D"
       },
-      "description": "Move all emails for the current PR to Trash"
+      "description": "Delete all for the current PR"
     }
   },
   "content_scripts": [
