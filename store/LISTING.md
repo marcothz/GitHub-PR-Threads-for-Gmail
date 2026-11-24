@@ -52,7 +52,7 @@ Open source: https://github.com/marcothz/GitHub-PR-Threads-for-Gmail
 | Asset | Size | Required | Source |
 | --- | --- | --- | --- |
 | Store icon | 128×128 PNG | yes | `icons/icon128.png` |
-| Screenshots (1 to 5) | 1280×800 or 640×400 | yes, at least 1 | take them in Gmail (see below) |
+| Screenshots (1 to 5) | 1280×800 or 640×400 | yes, at least 1 | `store/screenshots/screenshot-1-1280x800.png`; more ideas below |
 | Small promo tile | 440×280 | no | |
 | Marquee promo tile | 1400×560 | no | |
 
