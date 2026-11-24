@@ -1,8 +1,14 @@
 {
   "manifest_version": 3,
   "name": "GitHub PR Threads for Gmail",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Find, review the status of and clean up every GitHub notification email about the same pull request.",
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
   "permissions": [
     "storage"
   ],
@@ -14,6 +20,10 @@
     "service_worker": "background.js"
   },
   "action": {
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png"
+    },
     "default_title": "Find all emails for this PR"
   },
   "options_ui": {

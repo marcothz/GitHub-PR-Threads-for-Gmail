@@ -57,3 +57,8 @@ page.
 - `content.css` – status chips, button and toast styles.
 - `background.js` – shortcut/toolbar relay and GitHub API calls.
 - `options.html`, `options.js` – token settings page.
+- `icons/` – extension icons (16, 32, 48, 128 px).
+
+## License
+
+MIT. See [LICENSE](LICENSE).
