@@ -1,0 +1,164 @@
+/* Kept close to Gmail's own chip style so it reads as part of the page.
+   State colors follow GitHub's, so a glance matches what you see there. */
+
+.ghpr-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 8px 0 0;
+  font: 400 13px/20px "Google Sans", Roboto, Arial, sans-serif;
+}
+
+.ghpr-status {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.ghpr-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 10px;
+  border-radius: 12px;
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+/* PR state: filled, the one strong signal in the bar. */
+.ghpr-chip--open   { background: #1a7f37; color: #fff; }
+.ghpr-chip--draft  { background: #6e7781; color: #fff; }
+.ghpr-chip--merged { background: #8250df; color: #fff; }
+.ghpr-chip--closed { background: #cf222e; color: #fff; }
+a.ghpr-chip:hover  { filter: brightness(1.1); }
+
+/* Review and checks: outlined, secondary to the state. */
+.ghpr-chip--good { border: 1px solid #1a7f37; color: #1a7f37; }
+.ghpr-chip--bad  { border: 1px solid #cf222e; color: #cf222e; }
+.ghpr-chip--wait { border: 1px solid #9a6700; color: #9a6700; }
+
+.ghpr-note {
+  color: #5f6368;
+}
+
+.ghpr-link {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: #0b57d0;
+  font: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.ghpr-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 12px;
+  border: 1px solid #747775;
+  border-radius: 16px;
+  background: transparent;
+  color: #0b57d0;
+  font: 500 13px/20px "Google Sans", Roboto, Arial, sans-serif;
+  cursor: pointer;
+}
+
+.ghpr-btn:hover {
+  background: rgba(11, 87, 208, 0.08);
+}
+
+.ghpr-btn--danger {
+  color: #b3261e;
+}
+
+.ghpr-btn--danger:hover {
+  background: rgba(179, 38, 30, 0.08);
+}
+
+.ghpr-btn:focus-visible,
+.ghpr-link:focus-visible,
+a.ghpr-chip:focus-visible,
+#ghpr-dialog button:focus-visible {
+  outline: 2px solid #0b57d0;
+  outline-offset: 2px;
+}
+
+/* Confirmation dialog, modeled on Gmail's own dialogs. */
+#ghpr-dialog {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.ghpr-dialog {
+  box-sizing: border-box;
+  width: min(440px, calc(100vw - 32px));
+  padding: 24px;
+  border-radius: 16px;
+  background: #fff;
+  color: #1f1f1f;
+  font: 400 14px/20px Roboto, Arial, sans-serif;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.ghpr-dialog h2 {
+  margin: 0 0 12px;
+  font: 400 22px/28px "Google Sans", Roboto, Arial, sans-serif;
+}
+
+.ghpr-dialog p {
+  margin: 0 0 8px;
+  color: #444746;
+}
+
+.ghpr-dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 24px;
+}
+
+.ghpr-dialog-actions button {
+  padding: 10px 20px;
+  border: 0;
+  border-radius: 20px;
+  font: 500 14px/20px "Google Sans", Roboto, Arial, sans-serif;
+  cursor: pointer;
+}
+
+.ghpr-dialog-cancel {
+  background: transparent;
+  color: #0b57d0;
+}
+
+.ghpr-dialog-cancel:hover {
+  background: rgba(11, 87, 208, 0.08);
+}
+
+.ghpr-dialog-confirm {
+  background: #b3261e;
+  color: #fff;
+}
+
+.ghpr-dialog-confirm:hover {
+  background: #8c1d18;
+}
+
+#ghpr-toast {
+  position: fixed;
+  left: 24px;
+  bottom: 24px;
+  z-index: 9999;
+  padding: 12px 20px;
+  border-radius: 4px;
+  background: #303030;
+  color: #f2f2f2;
+  font: 400 14px/20px Roboto, Arial, sans-serif;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}

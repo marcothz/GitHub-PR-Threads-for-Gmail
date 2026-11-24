@@ -1,0 +1,51 @@
+{
+  "manifest_version": 3,
+  "name": "GitHub PR Threads for Gmail",
+  "version": "0.3.0",
+  "description": "Find, review the status of and clean up every GitHub notification email about the same pull request.",
+  "permissions": [
+    "storage"
+  ],
+  "host_permissions": [
+    "https://mail.google.com/*",
+    "https://api.github.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "Find all emails for this PR"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "commands": {
+    "find-pr-emails": {
+      "suggested_key": {
+        "default": "Alt+Shift+P"
+      },
+      "description": "Find all emails for the open PR notification"
+    },
+    "delete-pr-emails": {
+      "suggested_key": {
+        "default": "Alt+Shift+D"
+      },
+      "description": "Move all emails for the current PR to Trash"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "css": [
+        "content.css"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}

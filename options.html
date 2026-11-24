@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>GitHub PR Threads – Settings</title>
+  <style>
+    :root { color-scheme: light dark; --fg: #1f1f1f; --muted: #5f6368; --bg: #fff; --line: #c4c7c5; --accent: #0b57d0; --ok: #1a7f37; --err: #cf222e; }
+    @media (prefers-color-scheme: dark) {
+      :root { --fg: #e3e3e3; --muted: #a8abaf; --bg: #1f1f1f; --line: #444746; --accent: #a8c7fa; --ok: #4ac26b; --err: #ff8182; }
+    }
+    body { margin: 0; background: var(--bg); color: var(--fg); font: 400 14px/1.5 "Google Sans", Roboto, Arial, sans-serif; }
+    main { max-width: 560px; margin: 48px auto; padding: 0 24px; }
+    h1 { font-size: 22px; font-weight: 500; margin: 0 0 8px; }
+    p { color: var(--muted); margin: 0 0 16px; }
+    label { display: block; font-weight: 500; margin: 24px 0 6px; }
+    input { box-sizing: border-box; width: 100%; padding: 10px 12px; border: 1px solid var(--line); border-radius: 8px; background: transparent; color: var(--fg); font: inherit; }
+    .actions { display: flex; gap: 8px; margin-top: 12px; }
+    button { padding: 8px 16px; border-radius: 18px; border: 1px solid var(--line); background: transparent; color: var(--accent); font: 500 14px/20px inherit; cursor: pointer; }
+    button.primary { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+    button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    #result { min-height: 20px; margin-top: 12px; }
+    #result.ok { color: var(--ok); }
+    #result.err { color: var(--err); }
+    ul { color: var(--muted); padding-left: 20px; }
+    a { color: var(--accent); }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Connect GitHub</h1>
+    <p>A personal access token lets the extension show each PR's status in Gmail. It is stored only in this browser profile and sent only to api.github.com.</p>
+
+    <ul>
+      <li>Fine-grained token: give it read-only access to <em>Pull requests</em>, <em>Commit statuses</em> and <em>Contents</em> for the repositories you care about.</li>
+      <li>Classic token: the <code>repo</code> scope.</li>
+      <li>If your organization uses SSO, authorize the token for it on GitHub.</li>
+    </ul>
+    <p><a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener noreferrer">Create a token on GitHub</a></p>
+
+    <label for="token">Personal access token</label>
+    <input id="token" type="password" autocomplete="off" spellcheck="false" placeholder="github_pat_…">
+
+    <div class="actions">
+      <button id="save" class="primary" type="button">Save and test</button>
+      <button id="remove" type="button">Remove token</button>
+    </div>
+    <div id="result" role="status"></div>
+  </main>
+  <script src="options.js"></script>
+</body>
+</html>
