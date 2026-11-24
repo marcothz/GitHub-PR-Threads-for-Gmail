@@ -58,6 +58,29 @@ page.
 - `background.js` – shortcut/toolbar relay and GitHub API calls.
 - `options.html`, `options.js` – token settings page.
 - `icons/` – extension icons (16, 32, 48, 128 px).
+- `store/` – Chrome Web Store listing texts and release scripts.
+- `PRIVACY.md` – privacy policy.
+
+## Releasing
+
+1. Bump `"version"` in `manifest.json` and commit.
+2. Tag and push:
+
+   ```bash
+   git tag v<version> && git push origin main v<version>
+   ```
+
+The [Release workflow](.github/workflows/release.yml) checks that the tag
+matches the manifest, builds the zips, creates the GitHub release and uploads
+the new version to the Chrome Web Store for review.
+
+The store upload needs credentials. Set them up once with
+`./store/setup-webstore-api.sh`, which walks you through Google Cloud and
+saves them as GitHub secrets and variables. Without them, the workflow still
+creates the GitHub release and skips the store.
+
+A new version can't be submitted while the previous one is still in review.
+If the store step fails for that reason, re-run the job once the review ends.
 
 ## License
 

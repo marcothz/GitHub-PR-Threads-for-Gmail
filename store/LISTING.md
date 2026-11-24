@@ -128,12 +128,14 @@ Certify all three statements:
 
 ## Package
 
-Build the upload zip with:
+Releases are automated: see "Releasing" in the README. To build the zips by
+hand:
 
 ```bash
 ./store/package.sh
 ```
 
-It writes `dist/gmail-pr-threads-<version>.zip` with `manifest.json` at the
-root. Every upload needs a higher `version` in `manifest.json` than the last
-one.
+It writes `dist/gmail-pr-threads-<version>-webstore.zip` (for the store, with
+`manifest.json` at the root) and `dist/gmail-pr-threads-v<version>.zip` (for
+the GitHub release). Every store upload needs a higher `version` in
+`manifest.json` than the last one.

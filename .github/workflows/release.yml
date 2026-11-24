@@ -1,0 +1,99 @@
+name: Release
+
+# Push a tag like v0.3.3 (matching "version" in manifest.json) to:
+# 1. build both zips,
+# 2. create the GitHub release with the release zip attached,
+# 3. upload the store zip to the Chrome Web Store and submit it for review
+#    (only when the CWS_* variables and secrets are set; see store/setup-webstore-api.sh).
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check the tag matches manifest.json
+        id: version
+        run: |
+          version=$(jq -r .version manifest.json)
+          if [[ "v${version}" != "${GITHUB_REF_NAME}" ]]; then
+            echo "::error file=manifest.json::Tag ${GITHUB_REF_NAME} does not match manifest version ${version}. Bump \"version\" in manifest.json, commit, and tag v<version>."
+            exit 1
+          fi
+          echo "version=${version}" >> "$GITHUB_OUTPUT"
+
+      - name: Build zips
+        run: ./store/package.sh
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: zips
+          path: dist/*.zip
+          if-no-files-found: error
+
+  github-release:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+      VERSION: ${{ needs.build.outputs.version }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: zips
+          path: dist
+
+      - name: Create or update the release
+        run: |
+          zip="dist/gmail-pr-threads-v${VERSION}.zip"
+          if gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1; then
+            gh release upload "$GITHUB_REF_NAME" "$zip" --clobber
+            exit 0
+          fi
+          {
+            gh api "repos/${GITHUB_REPOSITORY}/releases/generate-notes" \
+              -f tag_name="$GITHUB_REF_NAME" --jq .body
+            echo
+            sed "s/VERSION/${VERSION}/g" store/release-notes.md
+          } > notes.md
+          gh release create "$GITHUB_REF_NAME" "$zip" \
+            --title "$GITHUB_REF_NAME" --notes-file notes.md --verify-tag
+
+  chrome-web-store:
+    needs: [build, github-release]
+    if: ${{ vars.CWS_EXTENSION_ID != '' && vars.CWS_PUBLISHER_ID != '' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: zips
+          path: dist
+
+      - name: Upload and submit for review
+        env:
+          CWS_CLIENT_ID: ${{ secrets.CWS_CLIENT_ID }}
+          CWS_CLIENT_SECRET: ${{ secrets.CWS_CLIENT_SECRET }}
+          CWS_REFRESH_TOKEN: ${{ secrets.CWS_REFRESH_TOKEN }}
+          CWS_PUBLISHER_ID: ${{ vars.CWS_PUBLISHER_ID }}
+          CWS_EXTENSION_ID: ${{ vars.CWS_EXTENSION_ID }}
+          VERSION: ${{ needs.build.outputs.version }}
+        run: ./store/publish.sh "dist/gmail-pr-threads-${VERSION}-webstore.zip"
