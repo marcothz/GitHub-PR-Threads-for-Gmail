@@ -2,6 +2,8 @@
 
 Chrome extension (Manifest V3) for GitHub pull request notifications in Gmail.
 
+**[Install from the Chrome Web Store](https://chromewebstore.google.com/detail/github-pr-threads-for-gma/fclgmbaligcklgjbbepegfjacmhikaan)**
+
 ## Features
 
 - **PR status under the subject**: state (Open, Draft, Merged, Closed), review
@@ -33,15 +35,18 @@ changes, update them there.
 
 ## Setup
 
-1. Open `chrome://extensions`, turn on **Developer mode**, click
-   **Load unpacked** and select this folder (or click **Reload** if it was
-   already installed).
+1. Install the extension from the
+   [Chrome Web Store](https://chromewebstore.google.com/detail/github-pr-threads-for-gma/fclgmbaligcklgjbbepegfjacmhikaan).
 2. Open the extension's **Details → Extension options** and save a GitHub
    personal access token:
    - Fine-grained: read-only *Pull requests*, *Commit statuses* and *Contents*.
    - Classic: `repo` scope.
    - Authorize it for your organization's SSO if required.
 3. Reload Gmail.
+
+To run it from source instead, open `chrome://extensions`, turn on
+**Developer mode**, click **Load unpacked** and select this folder (or click
+**Reload** if it was already installed), then follow steps 2 and 3.
 
 ## How the status is fetched
 
